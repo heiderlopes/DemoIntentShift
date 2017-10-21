@@ -41,6 +41,6 @@ public class ValidaLoginActivity extends AppCompatActivity {
                 setResult(RESULT_OK, resultado);
                 finish();
             }
-        }, 2000);
+        }, 1000);
     }
 }
