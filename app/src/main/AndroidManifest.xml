@@ -17,6 +17,15 @@
         </activity>
         <activity android:name=".ValidaLoginActivity" />
         <activity android:name=".MainActivity"></activity>
+
+        <receiver android:name=".broadcastreceiver.MyReceiver">
+            <intent-filter>
+                <action android:name="android.app.action.LOGIN_SUCESSO"
+                    />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".broadcastreceiver.AlarmeReceiver"/>
     </application>
 
 </manifest>

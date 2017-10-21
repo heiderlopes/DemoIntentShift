@@ -1,10 +1,15 @@
 package br.com.heiderlopes.demointent;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import br.com.heiderlopes.demointent.broadcastreceiver.AlarmeReceiver;
 import br.com.heiderlopes.demointent.utils.Constantes;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvPlacarVisitante;
     private TextView tvPlacarHome;
 
+    private EditText etTempoJogo;
+
     private int placarHome = 0;
     private int placarVisitante = 0;
 
@@ -20,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        etTempoJogo = (EditText) findViewById(R.id.etTempoJogo);
 
         tvLogin = (TextView)findViewById(R.id.tvLogin);
         tvPlacarHome = (TextView)findViewById(R.id.tvPlacarHome);
@@ -54,5 +63,19 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putInt(Constantes.KEY_PLACAR_CASA, placarHome);
         outState.putInt(Constantes.KEY_PLACAR_VISITANTE, placarVisitante);
+    }
+
+    public void programarAlarme(View v) {
+        int tempo = Integer.parseInt(etTempoJogo.getText().toString());
+        Intent i = new Intent(this, AlarmeReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this.getApplicationContext(), 0, i, 0);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP,
+                System.currentTimeMillis() + (tempo * 1000),
+                pendingIntent);
+
     }
 }

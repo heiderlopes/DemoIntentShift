@@ -89,4 +89,18 @@
             android:onClick="golVisitante"/>
 
     </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etTempoJogo"
+        android:hint="Tempo do Jogo em segundos"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Programar alarme"
+        android:id="@+id/btProgramarAlarme"
+        android:onClick="programarAlarme"/>
+
 </LinearLayout>
